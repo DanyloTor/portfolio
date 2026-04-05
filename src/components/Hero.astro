@@ -2,7 +2,7 @@
 const base = import.meta.env.BASE_URL;
 ---
 
-<section id="hero" class="relative min-h-[100dvh] flex items-center justify-center overflow-hidden">
+<section id="hero" class="relative flex items-center justify-center overflow-hidden">
   <!-- Gradient background -->
   <div class="absolute inset-0 bg-gradient-to-br from-bg-deep via-deep-violet to-violet-900"></div>
 
@@ -11,7 +11,7 @@ const base = import.meta.env.BASE_URL;
 
   <!-- Content -->
   <div class="relative z-10 text-center px-4">
-    <div class="backdrop-blur-sm bg-bg-deep/20 rounded-3xl p-8 md:p-12">
+    <div class="bg-bg-deep/30 rounded-3xl p-8 md:p-12 md:backdrop-blur-sm">
     <!-- Team photos -->
     <div class="flex justify-center gap-6 mb-8">
       <div class="hero-avatar gradient-border w-36 h-36 md:w-44 md:h-44 rounded-full p-[3px] shadow-[0_0_30px_rgba(124,58,237,0.4)]">
@@ -118,6 +118,12 @@ const base = import.meta.env.BASE_URL;
       requestAnimationFrame(animate);
     }
     animate();
+  }
+
+  // Fix hero height once on load to prevent mobile browser bar jump
+  const hero = document.getElementById('hero');
+  if (hero) {
+    hero.style.minHeight = `${window.innerHeight}px`;
   }
 
   // GSAP entrance animations
