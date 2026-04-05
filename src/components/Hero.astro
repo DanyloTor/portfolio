@@ -80,8 +80,13 @@ const base = import.meta.env.BASE_URL;
     const ctx = canvas.getContext('2d')!;
     let particles: { x: number; y: number; vx: number; vy: number; size: number; opacity: number }[] = [];
 
+    let lastWidth = 0;
     function resize() {
-      canvas.width = window.innerWidth;
+      const w = window.innerWidth;
+      // Only resize when width changes — ignore mobile browser bar show/hide
+      if (w === lastWidth) return;
+      lastWidth = w;
+      canvas.width = w;
       canvas.height = window.innerHeight;
     }
     resize();
