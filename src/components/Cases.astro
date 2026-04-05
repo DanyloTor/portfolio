@@ -43,7 +43,7 @@ const cases = [
     <div class="relative group">
       <!-- Arrow left -->
       <button
-        class="carousel-arrow carousel-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-bg-card/80 backdrop-blur border border-deep-violet rounded-full flex items-center justify-center text-violet-300 hover:bg-violet-600 hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
+        class="carousel-arrow carousel-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-bg-card/80 backdrop-blur border border-deep-violet rounded-full flex items-center justify-center text-violet-300 hover:bg-violet-600 hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden"
         aria-label="Previous"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
@@ -82,7 +82,7 @@ const cases = [
 
       <!-- Arrow right -->
       <button
-        class="carousel-arrow carousel-next absolute right-2 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-bg-card/80 backdrop-blur border border-deep-violet rounded-full flex items-center justify-center text-violet-300 hover:bg-violet-600 hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
+        class="carousel-arrow carousel-next absolute right-2 top-1/2 -translate-y-1/2 z-10 w-12 h-12 bg-bg-card/80 backdrop-blur border border-deep-violet rounded-full flex items-center justify-center text-violet-300 hover:bg-violet-600 hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden"
         aria-label="Next"
       >
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
@@ -132,7 +132,14 @@ const cases = [
       track.scrollBy({ left: getPageWidth(), behavior: 'smooth' });
     });
 
-    track.addEventListener('scroll', () => {
+    function updateCasesArrows() {
+      const hasOverflow = track.scrollWidth > track.clientWidth + 1;
+      const atStart = track.scrollLeft <= 1;
+      const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1;
+
+      (prevBtn as HTMLElement).classList.toggle('md:flex', hasOverflow && !atStart);
+      (nextBtn as HTMLElement).classList.toggle('md:flex', hasOverflow && !atEnd);
+
       const scrollLeft = track.scrollLeft;
       const pageWidth = getPageWidth();
       const activeIndex = Math.round(scrollLeft / pageWidth);
@@ -142,7 +149,10 @@ const cases = [
         dot.classList.toggle('bg-violet-900', i !== activeIndex);
         dot.classList.toggle('w-2', i !== activeIndex);
       });
-    });
+    }
+
+    track.addEventListener('scroll', updateCasesArrows);
+    window.addEventListener('resize', updateCasesArrows);
 
     dots.forEach((dot) => {
       dot.addEventListener('click', () => {
@@ -151,7 +161,6 @@ const cases = [
       });
     });
 
-    dots[0]?.classList.add('bg-violet-400', 'w-6');
-    dots[0]?.classList.remove('bg-violet-900', 'w-2');
+    updateCasesArrows();
   }
 </script>
