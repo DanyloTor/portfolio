@@ -1,0 +1,70 @@
+---
+const steps = ['Аналіз ЦА', 'Стратегія', 'Контент', 'Воронка продажів'];
+
+const services = [
+  { title: 'Контент-стратегія', icon: '📋' },
+  { title: 'Фото/Відеозйомка', icon: '📸' },
+  { title: 'Дизайн та верстка', icon: '🎨' },
+  { title: 'Ведення акаунтів', icon: '📱' },
+];
+---
+
+<section id="services" class="py-16 md:py-24 px-4 bg-bg-section">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="services-title text-3xl md:text-5xl font-bold text-text-primary text-center mb-16">
+      Повний цикл проекту під ключ
+    </h2>
+
+    <!-- Process flow -->
+    <div class="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-16">
+      {steps.map((step, i) => (
+        <div class="flex items-center gap-3 md:gap-4">
+          <span class="flow-step bg-deep-violet text-violet-300 px-5 py-3 rounded-xl text-sm md:text-base font-medium">
+            {step}
+          </span>
+          {i < steps.length - 1 && (
+            <span class="flow-arrow text-violet-600 text-xl font-bold">→</span>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Service cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {services.map((service) => (
+        <div class="service-card bg-bg-card border border-deep-violet rounded-2xl p-6 text-center transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] hover:-translate-y-1">
+          <div class="text-4xl mb-4">{service.icon}</div>
+          <h3 class="text-violet-100 font-semibold">{service.title}</h3>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.services-title', {
+    y: 30, duration: 0.8,
+    scrollTrigger: { trigger: '#services', start: 'top 80%' },
+  });
+
+  gsap.from('.flow-step', {
+    x: -20, duration: 0.5, stagger: 0.12,
+    scrollTrigger: { trigger: '#services', start: 'top 75%' },
+  });
+
+  gsap.from('.flow-arrow', {
+    scale: 0, duration: 0.3, stagger: 0.12, delay: 0.1,
+    scrollTrigger: { trigger: '#services', start: 'top 75%' },
+  });
+
+  document.querySelectorAll('.service-card').forEach((card, i) => {
+    gsap.from(card, {
+      y: 30, scale: 0.95, duration: 0.5, delay: i * 0.1,
+      scrollTrigger: { trigger: '#services', start: 'top 65%' },
+    });
+  });
+</script>

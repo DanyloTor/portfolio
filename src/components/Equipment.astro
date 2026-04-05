@@ -1,0 +1,79 @@
+---
+const equipment = [
+  { name: 'Камера Canon', type: 'hardware', icon: '📷' },
+  { name: 'DJI Mic Mini', type: 'hardware', icon: '🎙️' },
+  { name: 'iPhone 15 Pro Max', type: 'hardware', icon: '📱' },
+  { name: 'iPhone 14 Pro', type: 'hardware', icon: '📱' },
+  { name: 'Figma', type: 'software', icon: '🎨' },
+  { name: 'CapCut', type: 'software', icon: '🎬' },
+];
+---
+
+<section id="equipment" class="py-20 md:py-32 bg-bg-section">
+  <div class="max-w-7xl mx-auto">
+    <h2 class="equip-title text-3xl md:text-5xl font-bold text-text-primary text-center mb-4 px-4">
+      Наша система та обладнання
+    </h2>
+    <p class="text-text-muted text-center mb-12 px-4 max-w-2xl mx-auto">
+      Ми переносимо нашу відпрацьовану систему на вашу нішу, щоб отримати прогнозований результат, а не випадкові перегляди
+    </p>
+
+    <div class="relative group">
+      <button
+        class="equip-prev absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-bg-card/80 backdrop-blur border border-deep-violet rounded-full flex items-center justify-center text-violet-300 hover:bg-violet-600 hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
+        aria-label="Previous"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+      </button>
+
+      <div class="equip-track carousel-track flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4 md:px-12 pb-4">
+        {equipment.map((item) => (
+          <div class="equip-card flex-shrink-0 w-48 md:w-56 snap-center bg-bg-card border border-deep-violet rounded-2xl p-6 text-center transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_20px_rgba(124,58,237,0.15)]">
+            <div class="text-4xl mb-3">{item.icon}</div>
+            <h3 class="text-violet-100 font-semibold text-sm">{item.name}</h3>
+            <span class="text-xs text-text-muted mt-1 block capitalize">{item.type}</span>
+          </div>
+        ))}
+      </div>
+
+      <button
+        class="equip-next absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-bg-card/80 backdrop-blur border border-deep-violet rounded-full flex items-center justify-center text-violet-300 hover:bg-violet-600 hover:text-white transition-all opacity-0 group-hover:opacity-100 hidden md:flex"
+        aria-label="Next"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.equip-title', {
+    y: 30, duration: 0.8,
+    scrollTrigger: { trigger: '#equipment', start: 'top 80%' },
+  });
+
+  document.querySelectorAll('.equip-card').forEach((card, i) => {
+    gsap.from(card, {
+      x: 40, scale: 0.9, duration: 0.5, delay: i * 0.08, ease: 'back.out(1.4)',
+      scrollTrigger: { trigger: '#equipment', start: 'top 70%' },
+    });
+  });
+
+  const track = document.querySelector('.equip-track') as HTMLElement;
+  const prevBtn = document.querySelector('.equip-prev');
+  const nextBtn = document.querySelector('.equip-next');
+
+  if (track && prevBtn && nextBtn) {
+    const scrollAmount = 240;
+    prevBtn.addEventListener('click', () => {
+      track.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    nextBtn.addEventListener('click', () => {
+      track.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+  }
+</script>

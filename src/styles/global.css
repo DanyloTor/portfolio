@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  /* Background colors */
+  --color-bg-deep: #0a0a14;
+  --color-bg-card: #12121f;
+  --color-bg-section: #1a1a2e;
+
+  /* Primary violet */
+  --color-violet-900: #4C1D95;
+  --color-violet-700: #6D28D9;
+  --color-violet-600: #7C3AED;
+  --color-violet-400: #A78BFA;
+  --color-violet-300: #C084FC;
+  --color-violet-200: #DDD6FE;
+  --color-violet-100: #E9D5FF;
+  --color-violet-50: #FAF5FF;
+
+  /* Deep violet for gradients */
+  --color-deep-violet: #2D1B69;
+
+  /* Text */
+  --color-text-primary: #ffffff;
+  --color-text-body: #e0e0e0;
+  --color-text-muted: #888888;
+
+  /* Fonts */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg-deep);
+  color: var(--color-text-body);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-violet-900);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-violet-600);
+}
+
+/* Horizontal carousel scrollbar hide */
+.carousel-track::-webkit-scrollbar {
+  display: none;
+}
+.carousel-track {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

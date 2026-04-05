@@ -1,0 +1,61 @@
+---
+const base = import.meta.env.BASE_URL;
+const team = [
+  {
+    name: 'Єлизавета',
+    role: 'контент-стратег, копірайтер, сценарист',
+    image: `${base}images/team/yelyzaveta.jpg`,
+  },
+  {
+    name: 'Власта',
+    role: 'дизайнер, сторісмейкер, візуальний стратег',
+    image: `${base}images/team/vlasta.jpg`,
+  },
+];
+---
+
+<section id="about" class="py-20 md:py-32 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="about-title text-3xl md:text-5xl font-bold text-text-primary text-center mb-6">
+      Хто ми та що пропонуємо?
+    </h2>
+    <p class="about-desc text-text-muted text-center max-w-2xl mx-auto mb-16 text-lg">
+      Ми не просто знімаємо відео — ми впроваджуємо чітку систему, яка перетворює глядачів на клієнтів.
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {team.map((person) => (
+        <div class="about-card group bg-bg-card border border-deep-violet rounded-2xl p-8 text-center transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)]">
+          <div class="w-32 h-32 mx-auto mb-6 rounded-full overflow-hidden border-3 border-violet-900 group-hover:border-violet-300 transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(124,58,237,0.4)]">
+            <img src={person.image} alt={person.name} class="w-full h-full object-cover" />
+          </div>
+          <h3 class="text-2xl font-bold text-violet-100 mb-2">{person.name}</h3>
+          <p class="text-violet-300 text-sm tracking-wide">{person.role}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.about-title', {
+    y: 30, duration: 0.8,
+    scrollTrigger: { trigger: '#about', start: 'top 80%' },
+  });
+
+  gsap.from('.about-desc', {
+    y: 20, duration: 0.8, delay: 0.15,
+    scrollTrigger: { trigger: '#about', start: 'top 80%' },
+  });
+
+  document.querySelectorAll('.about-card').forEach((card, i) => {
+    gsap.from(card, {
+      y: 40, scale: 0.95, duration: 0.7, delay: i * 0.15,
+      scrollTrigger: { trigger: '#about', start: 'top 70%' },
+    });
+  });
+</script>

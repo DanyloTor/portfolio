@@ -1,0 +1,83 @@
+---
+const stats = [
+  { value: 218000, suffix: '+', label: 'переглядів рілсів', display: '218K' },
+  { value: 93400, suffix: '', label: 'охоплення', display: '93.4K' },
+  { value: 500, suffix: '+', label: 'нових підписників', display: '500' },
+];
+---
+
+<section id="results" class="py-20 md:py-32 px-4 bg-bg-section">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="results-title text-3xl md:text-5xl font-bold text-text-primary text-center mb-4">
+      Віральний контент — результати
+    </h2>
+    <p class="text-violet-300 text-center mb-16">знаємо алгоритми віральності</p>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {stats.map((stat) => (
+        <div class="result-card bg-bg-card border border-deep-violet rounded-2xl p-8 text-center transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_40px_rgba(124,58,237,0.2)]">
+          <div class="text-4xl md:text-5xl font-bold text-violet-400 mb-2">
+            <span class="counter" data-value={stat.value} data-display={stat.display}>{stat.display}</span>
+            <span class="text-violet-300">{stat.suffix}</span>
+          </div>
+          <p class="text-text-muted text-sm mt-2">{stat.label}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.results-title', {
+    y: 30, duration: 0.8,
+    scrollTrigger: { trigger: '#results', start: 'top 80%' },
+  });
+
+  document.querySelectorAll('.result-card').forEach((card, i) => {
+    gsap.from(card, {
+      y: 30, scale: 0.95, duration: 0.6, delay: i * 0.12,
+      scrollTrigger: { trigger: '#results', start: 'top 70%' },
+    });
+  });
+
+  const counters = document.querySelectorAll('.counter');
+  counters.forEach((counter) => {
+    const el = counter as HTMLElement;
+    const targetValue = parseInt(el.dataset.value || '0');
+    const displayValue = el.dataset.display || '0';
+
+    const formatNumber = (n: number): string => {
+      if (displayValue.includes('K')) {
+        const kValue = n / 1000;
+        if (displayValue.includes('.')) {
+          return kValue.toFixed(1) + 'K';
+        }
+        return Math.floor(kValue) + 'K';
+      }
+      return Math.floor(n).toLocaleString();
+    };
+
+    el.textContent = '0';
+    const obj = { val: 0 };
+
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        gsap.to(obj, {
+          val: targetValue,
+          duration: 2,
+          ease: 'power2.out',
+          onUpdate: () => {
+            el.textContent = formatNumber(obj.val);
+          },
+        });
+      },
+    });
+  });
+</script>

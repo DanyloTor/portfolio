@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <!-- SMM-themed: chat bubble with play button / content creation -->
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="128" y2="128" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#EC4899"/>
+    </linearGradient>
+  </defs>
+  <!-- Rounded chat bubble -->
+  <rect x="12" y="16" width="104" height="80" rx="20" fill="url(#g)"/>
+  <!-- Bubble tail -->
+  <path d="M32 96 L24 116 L52 96" fill="url(#g)"/>
+  <!-- Hashtag symbol -->
+  <path d="M42 44 L46 72 M54 44 L58 72 M38 52 L62 52 M40 64 L64 64" stroke="white" stroke-width="5" stroke-linecap="round"/>
+  <!-- Play triangle (content) -->
+  <path d="M76 46 L76 70 L96 58 Z" fill="white"/>
+</svg>

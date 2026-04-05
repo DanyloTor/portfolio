@@ -1,0 +1,55 @@
+---
+const formats = [
+  {
+    title: 'Backstage & Product',
+    description: 'Живий контент про продукт та команду',
+    icon: '🎬',
+  },
+  {
+    title: 'Atmospheric',
+    description: 'Естетика, яка продає',
+    icon: '✨',
+  },
+  {
+    title: 'Воронки',
+    description: 'Створюємо шлях клієнта від перегляду reels до покупки в direct',
+    icon: '🎯',
+  },
+];
+---
+
+<section id="formats" class="py-20 md:py-32 px-4">
+  <div class="max-w-5xl mx-auto">
+    <h2 class="formats-title text-3xl md:text-5xl font-bold text-text-primary text-center mb-16">
+      Формати та типи контенту
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {formats.map((format) => (
+        <div class="format-card bg-bg-card border border-deep-violet rounded-2xl p-8 transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] hover:-translate-y-1">
+          <div class="text-4xl mb-4">{format.icon}</div>
+          <h3 class="text-xl font-bold text-violet-100 mb-3">{format.title}</h3>
+          <p class="text-text-muted leading-relaxed">{format.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.formats-title', {
+    y: 30, duration: 0.8,
+    scrollTrigger: { trigger: '#formats', start: 'top 80%' },
+  });
+
+  document.querySelectorAll('.format-card').forEach((card, i) => {
+    gsap.from(card, {
+      y: 30, scale: 0.95, duration: 0.6, delay: i * 0.12,
+      scrollTrigger: { trigger: '#formats', start: 'top 70%' },
+    });
+  });
+</script>

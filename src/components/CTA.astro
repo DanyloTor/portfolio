@@ -1,0 +1,59 @@
+---
+---
+
+<section id="cta" class="py-20 md:py-32 px-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="cta-block relative bg-gradient-to-br from-deep-violet to-violet-900 rounded-3xl p-12 md:p-16 text-center overflow-hidden">
+      <div class="absolute inset-0 opacity-30">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet-600 rounded-full blur-[120px]"></div>
+      </div>
+
+      <div class="relative z-10">
+        <h2 class="cta-heading text-3xl md:text-5xl font-bold text-text-primary mb-6">
+          Готові масштабувати ваш бізнес?
+        </h2>
+        <p class="text-violet-200 mb-10 text-lg">
+          Напишіть нам і ми обговоримо вашу стратегію
+        </p>
+        <a
+          href="https://ig.me/m/crushikme"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta-button inline-flex items-center gap-2 bg-white text-violet-900 font-bold py-3 px-8 md:py-4 md:px-12 rounded-full text-sm md:text-lg transition-all duration-300 hover:shadow-[0_0_60px_rgba(255,255,255,0.3)] hover:scale-105 whitespace-nowrap"
+        >
+          Написати в Instagram Direct
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <p class="text-text-muted text-center text-sm mt-12">
+      &copy; 2026 Єлизавета & Власта. Всі права захищені.
+    </p>
+  </div>
+</section>
+
+<script>
+  import gsap from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.from('.cta-block', {
+    y: 40, scale: 0.95, duration: 0.8,
+    scrollTrigger: { trigger: '#cta', start: 'top 80%' },
+  });
+
+  gsap.from('.cta-heading', {
+    y: 20, duration: 0.6, delay: 0.15,
+    scrollTrigger: { trigger: '#cta', start: 'top 80%' },
+  });
+
+  gsap.to('.cta-button', {
+    boxShadow: '0 0 40px rgba(124, 58, 237, 0.6)',
+    duration: 1.5,
+    repeat: -1,
+    yoyo: true,
+    ease: 'sine.inOut',
+    scrollTrigger: { trigger: '.cta-button', start: 'top 90%' },
+  });
+</script>
