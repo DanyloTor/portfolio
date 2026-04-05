@@ -3,13 +3,14 @@
 
 <section id="cta" class="py-20 md:py-32 px-4">
   <div class="max-w-3xl mx-auto">
+    <div class="cta-border-wrapper relative rounded-3xl p-[2px] overflow-hidden" style="background: conic-gradient(from var(--angle, 0deg), #7C3AED, #FB7185, #C084FC, #7C3AED)">
     <div class="cta-block relative bg-gradient-to-br from-deep-violet to-violet-900 rounded-3xl p-12 md:p-16 text-center overflow-hidden">
       <div class="absolute inset-0 opacity-30">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-violet-600 rounded-full blur-[120px]"></div>
       </div>
 
       <div class="relative z-10">
-        <h2 class="cta-heading text-3xl md:text-5xl font-bold text-text-primary mb-6">
+        <h2 class="cta-heading font-display text-3xl md:text-5xl font-bold text-text-primary mb-6">
           Готові масштабувати ваш бізнес?
         </h2>
         <p class="text-violet-200 mb-10 text-lg">
@@ -26,12 +27,27 @@
         </a>
       </div>
     </div>
+    </div>
 
     <p class="text-text-muted text-center text-sm mt-12">
       &copy; 2026 Єлизавета & Власта. Всі права захищені.
     </p>
   </div>
 </section>
+
+<style>
+  .cta-border-wrapper {
+    animation: cta-rotate 4s linear infinite;
+  }
+  @keyframes cta-rotate {
+    to { --angle: 360deg; }
+  }
+  @property --angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+</style>
 
 <script>
   import gsap from 'gsap';

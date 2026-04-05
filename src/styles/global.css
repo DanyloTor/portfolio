@@ -19,13 +19,19 @@
   /* Deep violet for gradients */
   --color-deep-violet: #2D1B69;
 
+  /* Accent warm (rose/coral contrast to violet) */
+  --color-accent: #FB7185;
+  --color-accent-light: #FDA4AF;
+  --color-accent-dark: #E11D48;
+
   /* Text */
   --color-text-primary: #ffffff;
   --color-text-body: #e0e0e0;
   --color-text-muted: #888888;
 
   /* Fonts */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-display: 'Syne', 'DM Sans', system-ui, sans-serif;
 
   /* Breakpoints */
   --breakpoint-sm: 640px;
@@ -44,6 +50,31 @@ body {
   color: var(--color-text-body);
   font-family: var(--font-sans);
   overflow-x: hidden;
+}
+
+/* Display headings use Syne */
+h1, h2, h3 {
+  font-family: var(--font-display);
+}
+
+/* Gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-violet-300), var(--color-accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Animated gradient border */
+@keyframes gradient-rotate {
+  0% { --angle: 0deg; }
+  100% { --angle: 360deg; }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
 
 /* Scrollbar styling */

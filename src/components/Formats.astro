@@ -1,35 +1,44 @@
 ---
+// Format card data with accent colors and SVG icon markup
 const formats = [
   {
     title: 'Backstage & Product',
     description: 'Живий контент про продукт та команду',
-    icon: '🎬',
+    color: '#A78BFA',
+    svg: '<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>',
   },
   {
     title: 'Atmospheric',
     description: 'Естетика, яка продає',
-    icon: '✨',
+    color: '#FB7185',
+    svg: '<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456zM16.894 20.567L16.5 21.75l-.394-1.183a2.25 2.25 0 00-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 001.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 001.423 1.423l1.183.394-1.183.394a2.25 2.25 0 00-1.423 1.423z"/></svg>',
   },
   {
     title: 'Воронки',
     description: 'Створюємо шлях клієнта від перегляду reels до покупки в direct',
-    icon: '🎯',
+    color: '#34D399',
+    svg: '<svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3c2.755 0 5.455.232 8.083.678.533.09.917.556.917 1.096v1.044a2.25 2.25 0 01-.659 1.591l-5.432 5.432a2.25 2.25 0 00-.659 1.591v2.927a2.25 2.25 0 01-1.244 2.013L9.75 21v-6.568a2.25 2.25 0 00-.659-1.591L3.659 7.409A2.25 2.25 0 013 5.818V4.774c0-.54.384-1.006.917-1.096A48.32 48.32 0 0112 3z"/></svg>',
   },
 ];
 ---
 
 <section id="formats" class="py-20 md:py-32 px-4">
   <div class="max-w-5xl mx-auto">
-    <h2 class="formats-title text-3xl md:text-5xl font-bold text-text-primary text-center mb-16">
+    <h2 class="formats-title font-display text-3xl md:text-5xl font-bold text-text-primary text-center mb-16">
       Формати та типи контенту
     </h2>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       {formats.map((format) => (
-        <div class="format-card bg-bg-card border border-deep-violet rounded-2xl p-8 transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] hover:-translate-y-1">
-          <div class="text-4xl mb-4">{format.icon}</div>
-          <h3 class="text-xl font-bold text-violet-100 mb-3">{format.title}</h3>
-          <p class="text-text-muted leading-relaxed">{format.description}</p>
+        <div class="format-card bg-bg-card border border-deep-violet rounded-2xl overflow-hidden transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] hover:-translate-y-1">
+          <div class="h-[2px] w-full" style={`background: ${format.color}`}></div>
+          <div class="p-8">
+            <div class="w-14 h-14 rounded-xl flex items-center justify-center mb-5" style={`background: ${format.color}15`}>
+              <div style={`color: ${format.color}`} set:html={format.svg} />
+            </div>
+            <h3 class="text-xl font-bold text-violet-100 mb-3">{format.title}</h3>
+            <p class="text-text-muted leading-relaxed">{format.description}</p>
+          </div>
         </div>
       ))}
     </div>

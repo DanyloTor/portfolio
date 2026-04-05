@@ -1,30 +1,29 @@
 ---
-const base = import.meta.env.BASE_URL;
 const cases = [
   {
     name: 'Coffee Place №1',
-    image: `${base}/images/projects/coffee-place.jpg`,
+    image: '/images/projects/coffee-place.jpg',
     followers: '2 873',
     instagram: 'https://www.instagram.com/coffeeplace___1/',
     category: 'Кав\'ярня',
   },
   {
     name: 'Затишний дім',
-    image: `${base}/images/projects/zatyshnyi-dim.jpg`,
+    image: '/images/projects/zatyshnyi-dim.jpg',
     followers: '2 076',
     instagram: 'https://www.instagram.com/zatyshnyjdim.official/',
     category: 'Ресторан',
   },
   {
     name: 'Бюстьє',
-    image: `${base}/images/projects/biustie.jpg`,
+    image: '/images/projects/biustie.jpg',
     followers: '42.1K',
     instagram: 'https://www.instagram.com/biustie/',
     category: 'Магазин білизни',
   },
   {
     name: 'Food Place №1',
-    image: `${base}/images/projects/food-place.jpg`,
+    image: '/images/projects/food-place.jpg',
     followers: '1 480',
     instagram: 'https://www.instagram.com/foodplace___1/',
     category: 'Кафе',
@@ -34,7 +33,7 @@ const cases = [
 
 <section id="cases" class="py-20 md:py-32">
   <div class="max-w-7xl mx-auto">
-    <h2 class="cases-title text-3xl md:text-5xl font-bold text-text-primary text-center mb-4 px-4">
+    <h2 class="cases-title font-display text-3xl md:text-5xl font-bold text-text-primary text-center mb-4 px-4">
       Наші проєкти
     </h2>
     <p class="text-text-muted text-center mb-12 px-4">Повний цикл проекту під ключ</p>
@@ -50,15 +49,16 @@ const cases = [
       </button>
 
       <!-- Track -->
-      <div class="carousel-track flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-6 md:px-8 pb-4" style="scroll-padding-inline: 1.5rem;">
+      <div class="carousel-track flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory px-6 md:px-8 pt-4 pb-4" style="scroll-padding-inline: 1.5rem;">
         {cases.map((c) => (
           <a
             href={c.instagram}
             target="_blank"
             rel="noopener noreferrer"
-            class="case-card flex-shrink-0 w-[78vw] sm:w-[65vw] md:w-[calc(50%-2rem)] snap-start bg-bg-card border border-deep-violet rounded-2xl overflow-hidden transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_40px_rgba(124,58,237,0.2)] hover:-translate-y-2 block flex flex-col"
+            class="case-card flex-shrink-0 w-[78vw] sm:w-[65vw] md:w-[calc(50%-2rem)] snap-start bg-bg-card border border-deep-violet rounded-2xl overflow-hidden transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_50px_rgba(251,113,133,0.15)] hover:-translate-y-2 block flex flex-col"
           >
-            <div class="bg-bg-deep h-52 md:h-60 overflow-hidden flex items-center justify-center">
+            <div class="relative bg-bg-deep h-60 md:h-72 overflow-hidden flex items-center justify-center">
+              <div class="absolute inset-0 bg-gradient-to-t from-bg-card/80 to-transparent z-10 pointer-events-none"></div>
               <img
                 src={c.image}
                 alt={c.name}
@@ -66,10 +66,10 @@ const cases = [
               />
             </div>
             <div class="p-6 mt-auto">
-              <span class="text-xs text-text-muted uppercase tracking-wider">{c.category}</span>
+              <span class="text-xs text-violet-300 uppercase tracking-wider bg-violet-600/20 px-3 py-1 rounded-full inline-block">{c.category}</span>
               <h3 class="text-xl font-bold text-violet-100 mt-1 mb-2">{c.name}</h3>
               <div class="flex items-center justify-between">
-                <span class="text-violet-300 font-semibold">{c.followers} підписників</span>
+                <span class="text-accent font-bold text-lg">{c.followers} підписників</span>
                 <span class="text-violet-400 flex items-center gap-1 text-sm">
                   Instagram
                   <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
@@ -89,16 +89,6 @@ const cases = [
       </button>
     </div>
 
-    <!-- Dots indicator (2 pages of 2 cards) -->
-    <div class="flex justify-center gap-2 mt-6">
-      {[0, 1].map((i) => (
-        <button
-          class="carousel-dot w-2 h-2 rounded-full bg-violet-900 transition-all duration-300"
-          data-index={i}
-          aria-label={`Page ${i + 1}`}
-        ></button>
-      ))}
-    </div>
   </div>
 </section>
 
@@ -115,13 +105,11 @@ const cases = [
   const track = document.querySelector('#cases .carousel-track') as HTMLElement;
   const prevBtn = document.querySelector('#cases .carousel-prev');
   const nextBtn = document.querySelector('#cases .carousel-next');
-  const dots = document.querySelectorAll('#cases .carousel-dot');
-
   if (track && prevBtn && nextBtn) {
     const getPageWidth = () => {
       const card = track.querySelector('.case-card') as HTMLElement;
       if (!card) return 600;
-      return (card.offsetWidth + 24) * 2; // 2 cards per page
+      return (card.offsetWidth + 24) * 2;
     };
 
     prevBtn.addEventListener('click', () => {
@@ -139,28 +127,10 @@ const cases = [
 
       (prevBtn as HTMLElement).classList.toggle('md:flex', hasOverflow && !atStart);
       (nextBtn as HTMLElement).classList.toggle('md:flex', hasOverflow && !atEnd);
-
-      const scrollLeft = track.scrollLeft;
-      const pageWidth = getPageWidth();
-      const activeIndex = Math.round(scrollLeft / pageWidth);
-      dots.forEach((dot, i) => {
-        dot.classList.toggle('bg-violet-400', i === activeIndex);
-        dot.classList.toggle('w-6', i === activeIndex);
-        dot.classList.toggle('bg-violet-900', i !== activeIndex);
-        dot.classList.toggle('w-2', i !== activeIndex);
-      });
     }
 
     track.addEventListener('scroll', updateCasesArrows);
     window.addEventListener('resize', updateCasesArrows);
-
-    dots.forEach((dot) => {
-      dot.addEventListener('click', () => {
-        const index = parseInt((dot as HTMLElement).dataset.index || '0');
-        track.scrollTo({ left: index * getPageWidth(), behavior: 'smooth' });
-      });
-    });
-
     updateCasesArrows();
   }
 </script>

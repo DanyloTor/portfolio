@@ -1,17 +1,16 @@
 ---
-const base = import.meta.env.BASE_URL;
 const equipment = [
   { name: 'Камера Canon', type: 'hardware', emoji: '📷' },
   { name: 'DJI Mic Mini', type: 'hardware', emoji: '🎙️' },
   { name: 'iPhone 15 Pro', type: 'hardware', emoji: '📱' },
-  { name: 'Canva', type: 'software', icon: `${base}/images/icons/canva.svg` },
-  { name: 'CapCut', type: 'software', icon: `${base}/images/icons/capcut.svg` },
+  { name: 'Canva', type: 'software', icon: '/images/icons/canva.svg' },
+  { name: 'CapCut', type: 'software', icon: '/images/icons/capcut.svg' },
 ];
 ---
 
 <section id="equipment" class="py-20 md:py-32 bg-bg-section">
   <div class="max-w-7xl mx-auto">
-    <h2 class="equip-title text-3xl md:text-5xl font-bold text-text-primary text-center mb-4 px-4">
+    <h2 class="equip-title font-display text-3xl md:text-5xl font-bold text-text-primary text-center mb-4 px-4">
       Наша система та обладнання
     </h2>
     <p class="text-text-muted text-center mb-12 px-4 max-w-2xl mx-auto">
@@ -28,7 +27,7 @@ const equipment = [
 
       <div class="equip-track carousel-track flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory px-4 md:px-12 pb-4">
         {equipment.map((item) => (
-          <div class="equip-card flex-shrink-0 w-48 md:w-56 snap-center bg-bg-card border border-deep-violet rounded-2xl p-6 text-center transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_20px_rgba(124,58,237,0.15)]">
+          <div class="equip-card flex-shrink-0 w-52 md:w-60 snap-center bg-bg-card border border-deep-violet rounded-2xl p-6 text-center transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_20px_rgba(124,58,237,0.15)]">
             <div class="text-4xl mb-3 flex items-center justify-center h-12">
               {item.icon ? (
                 <img src={item.icon} alt={item.name} class="w-11 h-11 rounded-lg" />
@@ -37,7 +36,7 @@ const equipment = [
               )}
             </div>
             <h3 class="text-violet-100 font-semibold text-sm">{item.name}</h3>
-            <span class="text-xs text-text-muted mt-1 block capitalize">{item.type}</span>
+            <span class={`text-xs mt-2 inline-block px-2 py-0.5 rounded-full capitalize ${item.type === 'hardware' ? 'text-violet-400 bg-violet-600/15' : 'text-accent bg-accent/15'}`}>{item.type}</span>
           </div>
         ))}
       </div>
