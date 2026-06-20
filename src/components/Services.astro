@@ -1,85 +1,36 @@
 ---
-const steps = ['Аналіз ЦА', 'Стратегія', 'Контент', 'Воронка продажів'];
-
 const services = [
-  { title: 'Контент-стратегія' },
-  { title: 'Фото/Відеозйомка' },
-  { title: 'Дизайн контенту' },
-  { title: 'Ведення акаунтів' },
+  { n: '01', title: 'Контент-стратегія', desc: 'Аналіз ніші, конкурентів і ЦА — план, що веде до продажів' },
+  { n: '02', title: 'Фото / Відеозйомка', desc: 'Зйомка reels та контенту на профі-обладнання' },
+  { n: '03', title: 'Дизайн контенту', desc: 'Сторіс, обкладинки та візуал у єдиному стилі бренду' },
+  { n: '04', title: 'Ведення акаунтів', desc: 'Повне ведення: від ідеї до публікації та аналітики' },
 ];
 ---
 
-<section id="services" class="py-16 md:py-24 px-4 bg-bg-section">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="services-title font-display text-3xl md:text-5xl font-bold text-text-primary text-center mb-16">
-      Повний цикл проекту під ключ
-    </h2>
-
-    <!-- Process flow with numbered indicators -->
-    <div class="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-16">
-      {steps.map((step, i) => (
-        <div class="flex items-center gap-3 md:gap-4">
-          <span class="flow-step bg-deep-violet text-violet-300 px-5 py-3 rounded-xl text-sm md:text-base font-medium">
-            <span class="text-accent font-bold mr-2">{String(i + 1).padStart(2, '0')}</span>{step}
-          </span>
-          {i < steps.length - 1 && (
-            <span class="flow-arrow text-violet-600 text-xl font-bold">&rarr;</span>
-          )}
-        </div>
-      ))}
+<!-- SERVICES -->
+<section id="services" data-screen="services" style="padding:110px 40px;background:radial-gradient(120% 80% at 50% 0%, #100a1e 0%, #0A0612 60%);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;max-width:680px;margin:0 auto 56px;" data-reveal>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.26);font:600 11px/1 'Manrope';letter-spacing:.2em;text-transform:uppercase;color:#C9A9FF;margin-bottom:22px;">Послуги</div>
+      <h2 style="font-family:'Unbounded';font-weight:700;font-size:clamp(32px,4.4vw,54px);line-height:1.06;margin:0;letter-spacing:-0.02em;">Повний цикл проєкту під ключ</h2>
     </div>
-
-    <!-- Service cards with SVG icons -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      {services.map((service, i) => (
-        <div class="service-card group bg-bg-card border border-deep-violet rounded-2xl p-6 text-center transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_30px_rgba(124,58,237,0.15)] hover:-translate-y-1">
-          <div class="flex justify-center mb-4">
-            <div class="text-violet-400 group-hover:text-accent transition-colors duration-300">
-              {i === 0 && (
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z"/></svg>
-              )}
-              {i === 1 && (
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.04l-.821 1.315z"/><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z"/></svg>
-              )}
-              {i === 2 && (
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9.53 16.122a3 3 0 00-5.78 1.128 2.25 2.25 0 01-2.4 2.245 4.5 4.5 0 008.4-2.245c0-.399-.078-.78-.22-1.128zm0 0a15.998 15.998 0 003.388-1.62m-5.043-.025a15.994 15.994 0 011.622-3.395m3.42 3.42a15.995 15.995 0 004.764-4.648l3.876-5.814a1.151 1.151 0 00-1.597-1.597L14.146 6.32a15.996 15.996 0 00-4.649 4.763m3.42 3.42a6.776 6.776 0 00-3.42-3.42"/></svg>
-              )}
-              {i === 3 && (
-                <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>
-              )}
-            </div>
-          </div>
-          <h3 class="text-violet-100 font-semibold">{service.title}</h3>
+    <div style="display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;margin-bottom:48px;" data-reveal>
+      <div class="ev-chip" style="display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);"><span style="font:800 14px 'Unbounded';color:#FF5C7A;">01</span><span style="font-weight:600;font-size:15px;color:#F4F1FA;">Аналіз ЦА</span></div>
+      <span style="color:#6f5e8c;">→</span>
+      <div class="ev-chip" style="display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);"><span style="font:800 14px 'Unbounded';color:#FF5C7A;">02</span><span style="font-weight:600;font-size:15px;color:#F4F1FA;">Стратегія</span></div>
+      <span style="color:#6f5e8c;">→</span>
+      <div class="ev-chip" style="display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:14px;background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);"><span style="font:800 14px 'Unbounded';color:#FF5C7A;">03</span><span style="font-weight:600;font-size:15px;color:#F4F1FA;">Контент</span></div>
+      <span style="color:#6f5e8c;">→</span>
+      <div class="ev-chip ev-chip-pink" style="display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:14px;background:rgba(255,92,122,0.12);border:1px solid rgba(255,92,122,0.35);"><span style="font:800 14px 'Unbounded';color:#FF5C7A;">04</span><span style="font-weight:600;font-size:15px;color:#F4F1FA;">Воронка продажів</span></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;" data-reveal>
+      {services.map((s) => (
+        <div class="ev-card-soft" style="border-radius:20px;background:linear-gradient(180deg,#130c22,#0d0818);border:1px solid rgba(255,255,255,0.06);padding:30px;">
+          <div class="ev-icon" style="width:48px;height:48px;border-radius:13px;background:linear-gradient(135deg,#A855F7,#FF5C7A);display:flex;align-items:center;justify-content:center;font:800 18px 'Unbounded';color:#fff;margin-bottom:20px;">{s.n}</div>
+          <h3 style="font-family:'Unbounded';font-weight:600;font-size:18px;margin:0 0 10px;letter-spacing:-0.01em;">{s.title}</h3>
+          <p style="margin:0;color:#9b91b4;font-size:14px;line-height:1.55;">{s.desc}</p>
         </div>
       ))}
     </div>
   </div>
 </section>
-
-<script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.from('.services-title', {
-    y: 30, duration: 0.8,
-    scrollTrigger: { trigger: '#services', start: 'top 80%' },
-  });
-
-  gsap.from('.flow-step', {
-    x: -20, duration: 0.5, stagger: 0.12,
-    scrollTrigger: { trigger: '#services', start: 'top 75%' },
-  });
-
-  gsap.from('.flow-arrow', {
-    scale: 0, duration: 0.3, stagger: 0.12, delay: 0.1,
-    scrollTrigger: { trigger: '#services', start: 'top 75%' },
-  });
-
-  document.querySelectorAll('.service-card').forEach((card, i) => {
-    gsap.from(card, {
-      y: 30, scale: 0.95, duration: 0.5, delay: i * 0.1,
-      scrollTrigger: { trigger: '#services', start: 'top 65%' },
-    });
-  });
-</script>

@@ -6,22 +6,110 @@ import About from '../components/About.astro';
 import Services from '../components/Services.astro';
 import Cases from '../components/Cases.astro';
 import Results from '../components/Results.astro';
-import Formats from '../components/Formats.astro';
-import Equipment from '../components/Equipment.astro';
 import CTA from '../components/CTA.astro';
+import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 ---
 
-<Layout title="Єлизавета & Власта" description="SMM-спеціалісти, які створюють контент, розробляють стратегії та масштабують ваш бізнес у соціальних мережах.">
+<Layout title="Єлизавета & Власта" description="SMM-агенція повного циклу: від стратегії до воронки продажів у Direct. Контент, що продає, для кав'ярень, ресторанів і магазинів одягу.">
   <Nav />
+  <Hero />
   <main>
-    <Hero />
     <About />
     <Services />
     <Cases />
     <Results />
-    <Formats />
-    <Equipment />
     <CTA />
   </main>
+  <Footer />
 </Layout>
+
+<script>
+  // Reveal-on-scroll: matches design (IntersectionObserver + 1600ms fail-safe)
+  const els = Array.from(document.querySelectorAll('[data-reveal]'));
+  const reveal = (el: Element) => el.classList.add('ev-in');
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            reveal(e.target);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
+    );
+    els.forEach((el) => io.observe(el));
+  } else {
+    els.forEach(reveal);
+  }
+
+  // Fail-safe: never leave content hidden
+  setTimeout(() => els.forEach(reveal), 1600);
+</script>
+
+<script>
+  // Count-up: animate numbers 0 -> target once they enter the viewport
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const counters = Array.from(document.querySelectorAll<HTMLElement>('.ev-count'));
+
+  type Target = { value: number; hasK: boolean; hasM: boolean; lead: boolean; trail: boolean; decimals: number; valid: boolean };
+
+  const parseTarget = (raw: string): Target => {
+    const s = (raw || '').trim();
+    const lead = s.startsWith('+');
+    const trail = s.endsWith('+');
+    let core = s.replace(/^\+/, '').replace(/\+$/, '');
+    const hasK = /k/i.test(core);
+    const hasM = /m/i.test(core);
+    core = core.replace(/[km]/i, '');
+    const numericStr = core.replace(/\s/g, '');
+    const decimals = numericStr.includes('.') ? (numericStr.split('.')[1]?.length ?? 0) : 0;
+    const value = parseFloat(numericStr);
+    return { value, hasK, hasM, lead, trail, decimals, valid: !Number.isNaN(value) };
+  };
+
+  // Group thousands with a regular space, matching the design (e.g. 2 873)
+  const group = (intStr: string) => intStr.replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+  const format = (current: number, t: Target): string => {
+    const body = t.hasK || t.hasM || t.decimals > 0 ? current.toFixed(t.decimals) : group(Math.round(current).toString());
+    return (t.lead ? '+' : '') + body + (t.hasK ? 'K' : '') + (t.hasM ? 'M' : '') + (t.trail ? '+' : '');
+  };
+
+  const easeOutExpo = (p: number) => (p >= 1 ? 1 : 1 - Math.pow(2, -10 * p));
+
+  const run = (el: HTMLElement) => {
+    const t = parseTarget(el.textContent || '');
+    if (!t.valid) return;
+    const duration = 1400;
+    let start: number | null = null;
+    el.textContent = format(0, t);
+    const frame = (ts: number) => {
+      if (start === null) start = ts;
+      const p = Math.min((ts - start) / duration, 1);
+      el.textContent = format(t.value * easeOutExpo(p), t);
+      if (p < 1) requestAnimationFrame(frame);
+      else el.textContent = format(t.value, t);
+    };
+    requestAnimationFrame(frame);
+  };
+
+  if (counters.length && !prefersReduced && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.isIntersecting) {
+            run(e.target as HTMLElement);
+            io.unobserve(e.target);
+          }
+        });
+      },
+      { threshold: 0.5 },
+    );
+    counters.forEach((el) => io.observe(el));
+  }
+  // reduced-motion or no IntersectionObserver: server-rendered final values stay
+</script>

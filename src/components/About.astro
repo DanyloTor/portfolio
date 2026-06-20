@@ -1,68 +1,48 @@
 ---
 const base = import.meta.env.BASE_URL;
-const team = [
-  {
-    name: 'Єлизавета',
-    role: 'контент-стратег, копірайтер, сценарист',
-    quote: '«Кожне слово має працювати на результат»',
-    image: `${base}images/team/yelyzaveta.jpg`,
-  },
-  {
-    name: 'Власта',
-    role: 'дизайнер, сторісмейкер, візуальний стратег',
-    quote: '«Естетика — це перше враження, яке продає»',
-    image: `${base}images/team/vlasta.jpg`,
-  },
-];
 ---
 
-<section id="about" class="py-20 md:py-32 px-4">
-  <div class="max-w-5xl mx-auto">
-    <h2 class="about-title text-3xl md:text-5xl font-bold font-display text-text-primary text-center mb-6">
-      Хто ми та що пропонуємо?
-    </h2>
-    <p class="about-desc text-text-muted text-center max-w-2xl mx-auto mb-16 text-lg">
-      Ми не просто знімаємо відео — ми впроваджуємо чітку систему, яка перетворює глядачів на клієнтів.
-    </p>
-
-    <div class="flex flex-col md:flex-row gap-8 md:gap-12 items-start">
-      {team.map((person, i) => (
-        <div class={`about-card group overflow-hidden bg-bg-card border border-deep-violet rounded-2xl transition-all duration-300 hover:border-violet-600 hover:shadow-[0_0_40px_rgba(124,58,237,0.15)] flex-1 ${i === 1 ? 'md:mt-16' : 'md:mt-0'}`}>
-          {/* Gradient top border accent on hover */}
-          <div class="h-[2px] w-full bg-gradient-to-r from-violet-600 to-accent rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-          <div class="p-8">
-            <div class="w-40 h-40 md:w-48 md:h-48 mx-auto mb-6 rounded-full overflow-hidden border-3 border-violet-900 group-hover:border-violet-300 transition-all duration-300 group-hover:shadow-[0_0_30px_rgba(124,58,237,0.4)]">
-              <img src={person.image} alt={person.name} class="w-full h-full object-cover" />
+<!-- ABOUT -->
+<section id="about" data-screen="about" style="padding:110px 40px;">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;max-width:680px;margin:0 auto 64px;" data-reveal>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;background:rgba(168,85,247,0.08);border:1px solid rgba(168,85,247,0.26);font:600 11px/1 'Manrope';letter-spacing:.2em;text-transform:uppercase;color:#C9A9FF;margin-bottom:22px;">Про нас</div>
+      <h2 style="font-family:'Unbounded';font-weight:700;font-size:clamp(32px,4.4vw,54px);line-height:1.06;margin:0 0 18px;letter-spacing:-0.02em;">Хто ми та що пропонуємо</h2>
+      <p style="color:#B7AECB;font-size:18px;line-height:1.6;margin:0;">Ми не просто знімаємо відео — ми впроваджуємо чітку систему, яка перетворює глядачів на клієнтів.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;" data-reveal>
+      <div class="ev-card-lift" style="border-radius:24px;padding:1px;background:linear-gradient(135deg,rgba(168,85,247,0.5),rgba(255,92,122,0.15),transparent);">
+        <div class="ev-about-card" style="border-radius:23px;background:linear-gradient(180deg,#130c22,#0d0818);padding:38px;height:100%;box-sizing:border-box;">
+          <div class="ev-about-head" style="display:flex;align-items:center;gap:22px;margin-bottom:26px;">
+            <div class="ev-about-avatar" style="width:96px;height:96px;flex:0 0 96px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#A855F7,#FF5C7A);">
+              <div style="width:100%;height:100%;border-radius:50%;overflow:hidden;">
+                <img src={`${base}images/team/yelyzaveta.jpg`} alt="Єлизавета" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              </div>
             </div>
-            <h3 class="text-2xl font-bold text-violet-100 mb-2">{person.name}</h3>
-            <p class="text-violet-300 text-sm tracking-wide">{person.role}</p>
-            <p class="text-text-muted italic text-sm mt-3">{person.quote}</p>
+            <div>
+              <h3 class="ev-about-name" style="font-family:'Unbounded';font-weight:700;font-size:26px;margin:0 0 6px;">Єлизавета</h3>
+              <div style="color:#C9A9FF;font-weight:600;font-size:14px;">Контент-стратег · копірайтер · сценарист</div>
+            </div>
           </div>
+          <p style="margin:0;color:#B7AECB;font-size:16px;line-height:1.6;font-style:italic;border-left:2px solid rgba(255,92,122,0.5);padding-left:16px;">«Кожне слово має працювати на результат»</p>
         </div>
-      ))}
+      </div>
+      <div class="ev-card-lift" style="border-radius:24px;padding:1px;background:linear-gradient(135deg,rgba(255,92,122,0.5),rgba(168,85,247,0.15),transparent);">
+        <div class="ev-about-card" style="border-radius:23px;background:linear-gradient(180deg,#130c22,#0d0818);padding:38px;height:100%;box-sizing:border-box;">
+          <div class="ev-about-head" style="display:flex;align-items:center;gap:22px;margin-bottom:26px;">
+            <div class="ev-about-avatar" style="width:96px;height:96px;flex:0 0 96px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#FF5C7A,#A855F7);">
+              <div style="width:100%;height:100%;border-radius:50%;overflow:hidden;">
+                <img src={`${base}images/team/vlasta.jpg`} alt="Власта" style="width:100%;height:100%;object-fit:cover;display:block;" />
+              </div>
+            </div>
+            <div>
+              <h3 class="ev-about-name" style="font-family:'Unbounded';font-weight:700;font-size:26px;margin:0 0 6px;">Власта</h3>
+              <div style="color:#C9A9FF;font-weight:600;font-size:14px;">Дизайнер · сторісмейкер · візуальний стратег</div>
+            </div>
+          </div>
+          <p style="margin:0;color:#B7AECB;font-size:16px;line-height:1.6;font-style:italic;border-left:2px solid rgba(168,85,247,0.5);padding-left:16px;">«Естетика — це перше враження, яке продає»</p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-
-<script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.from('.about-title', {
-    y: 30, duration: 0.8,
-    scrollTrigger: { trigger: '#about', start: 'top 80%' },
-  });
-
-  gsap.from('.about-desc', {
-    y: 20, duration: 0.8, delay: 0.15,
-    scrollTrigger: { trigger: '#about', start: 'top 80%' },
-  });
-
-  document.querySelectorAll('.about-card').forEach((card, i) => {
-    gsap.from(card, {
-      y: 40, scale: 0.95, duration: 0.7, delay: i * 0.15,
-      scrollTrigger: { trigger: '#about', start: 'top 70%' },
-    });
-  });
-</script>

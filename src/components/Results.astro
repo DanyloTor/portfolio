@@ -1,86 +1,68 @@
 ---
 const stats = [
-  { value: 218000, suffix: '+', label: 'переглядів рілсів', display: '218K' },
-  { value: 93400, suffix: '', label: 'охоплення', display: '93.4K' },
-  { value: 500, suffix: '+', label: 'нових підписників', display: '500' },
+  { num: '1M+', label: 'переглядів рілсів' },
+  { num: '650K', label: 'охоплення' },
+  { num: '+30K', label: 'нових підписників' },
+];
+const equipment = [
+  { name: 'Камера Canon', tag: 'Hardware' },
+  { name: 'DJI Mic Mini', tag: 'Hardware' },
+  { name: 'iPhone 15 Pro', tag: 'Hardware' },
+  { name: 'Canva', tag: 'Software' },
+  { name: 'CapCut', tag: 'Software' },
 ];
 ---
 
-<section id="results" class="py-20 md:py-32 px-4 bg-bg-section relative overflow-hidden">
-  <!-- Subtle radial glow behind numbers -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-violet-600/8 rounded-full blur-[120px] pointer-events-none"></div>
-  <div class="absolute top-1/2 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-accent/5 rounded-full blur-[100px] pointer-events-none"></div>
-  <div class="max-w-5xl mx-auto relative z-10">
-    <h2 class="results-title text-3xl md:text-5xl font-bold font-display text-text-primary text-center mb-4">
-      Віральний контент — результати
-    </h2>
-    <p class="text-violet-300 text-center mb-16">знаємо алгоритми віральності</p>
+<!-- RESULTS -->
+<section id="results" data-screen="results" style="padding:110px 40px;background:radial-gradient(120% 90% at 50% 0%, #160b29 0%, #0A0612 55%);">
+  <div style="max-width:1200px;margin:0 auto;">
+    <div style="text-align:center;max-width:720px;margin:0 auto 64px;" data-reveal>
+      <div style="display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:999px;background:rgba(255,92,122,0.1);border:1px solid rgba(255,92,122,0.3);font:600 11px/1 'Manrope';letter-spacing:.2em;text-transform:uppercase;color:#FF8AA3;margin-bottom:22px;">Результати</div>
+      <h2 style="font-family:'Unbounded';font-weight:700;font-size:clamp(32px,4.4vw,54px);line-height:1.06;margin:0 0 14px;letter-spacing:-0.02em;">Віральний контент — результати</h2>
+      <p style="color:#B7AECB;font-size:18px;margin:0;">Ми знаємо алгоритми віральності — і застосовуємо їх системно</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:24px;margin-bottom:80px;" data-reveal>
+      {stats.map((st) => (
+        <div style="text-align:center;border-radius:20px;background:rgba(255,255,255,0.02);border:1px solid rgba(168,85,247,0.14);padding:40px 24px;">
+          <div class="ev-count" style="font-family:'Unbounded';font-weight:800;font-size:clamp(44px,5vw,64px);background:linear-gradient(120deg,#A855F7,#FF5C7A);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1;">{st.num}</div>
+          <div style="width:38px;height:3px;border-radius:2px;background:linear-gradient(90deg,#A855F7,#FF5C7A);margin:18px auto 14px;"></div>
+          <div style="color:#B7AECB;font-size:15px;font-weight:500;">{st.label}</div>
+        </div>
+      ))}
+    </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {stats.map((stat) => (
-        <div class="result-card bg-transparent rounded-2xl p-8 text-center transition-all duration-300">
-          <div class="text-5xl md:text-7xl font-extrabold mb-2">
-            <span class="gradient-text"><span class="counter" data-value={stat.value} data-display={stat.display}>{stat.display}</span>{stat.suffix}</span>
-          </div>
-          <p class="text-text-muted text-base mt-3 tracking-wide">{stat.label}</p>
-          <div class="w-12 h-[2px] bg-gradient-to-r from-violet-600 to-accent mx-auto mt-4"></div>
+    <div style="text-align:center;margin-bottom:40px;" data-reveal>
+      <h3 style="font-family:'Unbounded';font-weight:700;font-size:clamp(26px,3vw,38px);margin:0;letter-spacing:-0.02em;">Формати та типи контенту</h3>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;" data-reveal>
+      <div class="ev-card-soft" style="border-radius:20px;background:linear-gradient(180deg,#130c22,#0d0818);border:1px solid rgba(255,255,255,0.06);border-top:2px solid #A855F7;padding:32px;">
+        <div class="ev-icon" style="width:46px;height:46px;border-radius:13px;background:rgba(168,85,247,0.16);display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><span style="width:18px;height:18px;border-radius:5px;background:linear-gradient(135deg,#A855F7,#7C3AED);"></span></div>
+        <h4 style="font-family:'Unbounded';font-weight:600;font-size:19px;margin:0 0 10px;">Backstage &amp; Product</h4>
+        <p style="margin:0;color:#9b91b4;font-size:14px;line-height:1.55;">Живий контент про продукт та команду, що будує довіру</p>
+      </div>
+      <div class="ev-card-soft" style="border-radius:20px;background:linear-gradient(180deg,#130c22,#0d0818);border:1px solid rgba(255,255,255,0.06);border-top:2px solid #FF5C7A;padding:32px;">
+        <div class="ev-icon" style="width:46px;height:46px;border-radius:13px;background:rgba(255,92,122,0.16);display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><span style="width:18px;height:18px;border-radius:50%;background:linear-gradient(135deg,#FF5C7A,#FF8AA3);"></span></div>
+        <h4 style="font-family:'Unbounded';font-weight:600;font-size:19px;margin:0 0 10px;">Atmospheric</h4>
+        <p style="margin:0;color:#9b91b4;font-size:14px;line-height:1.55;">Естетика, яка продає та формує впізнаваний образ бренду</p>
+      </div>
+      <div class="ev-card-soft" style="border-radius:20px;background:linear-gradient(180deg,#130c22,#0d0818);border:1px solid rgba(255,255,255,0.06);border-top:2px solid #6EE7C8;padding:32px;">
+        <div class="ev-icon" style="width:46px;height:46px;border-radius:13px;background:rgba(110,231,200,0.14);display:flex;align-items:center;justify-content:center;margin-bottom:20px;"><span style="width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-top:16px solid #6EE7C8;"></span></div>
+        <h4 style="font-family:'Unbounded';font-weight:600;font-size:19px;margin:0 0 10px;">Воронки</h4>
+        <p style="margin:0;color:#9b91b4;font-size:14px;line-height:1.55;">Шлях клієнта від перегляду reels до покупки в Direct</p>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin:80px 0 32px;" data-reveal>
+      <h3 style="font-family:'Unbounded';font-weight:700;font-size:clamp(24px,2.8vw,34px);margin:0 0 12px;letter-spacing:-0.02em;">Наша система та обладнання</h3>
+      <p style="color:#9b91b4;font-size:16px;max-width:560px;margin:0 auto;line-height:1.55;">Переносимо відпрацьовану систему на вашу нішу — прогнозований результат, а не випадкові перегляди</p>
+    </div>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;" data-reveal>
+      {equipment.map((e) => (
+        <div class="ev-chip" style="display:inline-flex;align-items:center;gap:12px;padding:16px 22px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid rgba(255,255,255,0.08);">
+          <span style="font-weight:700;font-size:15px;color:#F4F1FA;">{e.name}</span>
+          <span style="font:600 10px 'Manrope';letter-spacing:.08em;text-transform:uppercase;color:#9b91b4;background:rgba(168,85,247,0.12);padding:4px 9px;border-radius:999px;">{e.tag}</span>
         </div>
       ))}
     </div>
   </div>
 </section>
-
-<script>
-  import gsap from 'gsap';
-  import { ScrollTrigger } from 'gsap/ScrollTrigger';
-  gsap.registerPlugin(ScrollTrigger);
-
-  gsap.from('.results-title', {
-    y: 30, duration: 0.8,
-    scrollTrigger: { trigger: '#results', start: 'top 80%' },
-  });
-
-  document.querySelectorAll('.result-card').forEach((card, i) => {
-    gsap.from(card, {
-      y: 30, scale: 0.95, duration: 0.6, delay: i * 0.12,
-      scrollTrigger: { trigger: '#results', start: 'top 70%' },
-    });
-  });
-
-  const counters = document.querySelectorAll('.counter');
-  counters.forEach((counter) => {
-    const el = counter as HTMLElement;
-    const targetValue = parseInt(el.dataset.value || '0');
-    const displayValue = el.dataset.display || '0';
-
-    const formatNumber = (n: number): string => {
-      if (displayValue.includes('K')) {
-        const kValue = n / 1000;
-        if (displayValue.includes('.')) {
-          return kValue.toFixed(1) + 'K';
-        }
-        return Math.floor(kValue) + 'K';
-      }
-      return Math.floor(n).toLocaleString();
-    };
-
-    el.textContent = '0';
-    const obj = { val: 0 };
-
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 90%',
-      once: true,
-      onEnter: () => {
-        gsap.to(obj, {
-          val: targetValue,
-          duration: 2,
-          ease: 'power2.out',
-          onUpdate: () => {
-            el.textContent = formatNumber(obj.val);
-          },
-        });
-      },
-    });
-  });
-</script>

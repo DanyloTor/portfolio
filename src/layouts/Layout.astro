@@ -17,7 +17,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://danyloto
     <meta name="description" content={description} />
     <meta name="author" content="Єлизавета & Власта" />
     <meta name="keywords" content="SMM, соціальні мережі, маркетинг, Instagram, TikTok, контент, просування, Україна" />
-    <meta name="theme-color" content="#7C3AED" />
+    <meta name="theme-color" content="#0A0612" />
     <link rel="canonical" href={canonicalURL} />
 
     <!-- Open Graph -->
@@ -39,10 +39,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://danyloto
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <title>{title}</title>
+    <noscript>
+      <style>
+        [data-reveal] { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
   </head>
   <body>
     <slot />

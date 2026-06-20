@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # superpowers
 .superpowers/
+
+# playwright mcp artifacts
+.playwright-mcp/

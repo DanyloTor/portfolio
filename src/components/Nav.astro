@@ -2,116 +2,56 @@
 const links = [
   { label: 'Про нас', href: '#about' },
   { label: 'Послуги', href: '#services' },
-  { label: 'Проєкти', href: '#cases' },
+  { label: 'Проєкти', href: '#projects' },
   { label: 'Результати', href: '#results' },
 ];
+const ig = 'https://www.instagram.com/crushikme/';
 ---
 
-<nav id="main-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-500 -translate-y-full">
-  <div class="backdrop-blur-xl bg-bg-deep/70 border-b border-deep-violet/50">
-    <div class="max-w-6xl mx-auto px-4 md:px-8 flex items-center justify-between h-16">
-      <!-- Logo -->
-      <a href="#hero" class="font-display text-lg font-bold text-text-primary tracking-tight">
-        <span class="text-violet-300">E</span>&<span class="text-accent">V</span>
-      </a>
+<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(10,6,18,0.78);border-bottom:1px solid rgba(168,85,247,0.12);">
+  <div class="ev-nav-inner" style="max-width:1200px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
+    <a href="#top" style="text-decoration:none;font-family:'Unbounded';font-weight:800;font-size:22px;letter-spacing:-0.02em;color:#fff;">E<span style="background:linear-gradient(120deg,#A855F7,#FF5C7A);-webkit-background-clip:text;background-clip:text;color:transparent;">&amp;</span>V</a>
 
-      <!-- Desktop links -->
-      <div class="hidden md:flex items-center gap-8">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class="text-sm text-text-muted hover:text-violet-300 transition-colors duration-300 tracking-wide"
-          >
-            {link.label}
-          </a>
-        ))}
-      </div>
+    <div class="ev-nav-links" style="display:flex;gap:36px;align-items:center;">
+      {links.map((l) => (
+        <a href={l.href} class="ev-navlink" style="text-decoration:none;color:#B7AECB;font-size:15px;font-weight:500;">{l.label}</a>
+      ))}
+    </div>
 
-      <!-- CTA -->
-      <a
-        href="https://www.instagram.com/crushikme/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="hidden md:inline-flex items-center gap-2 bg-violet-600/20 hover:bg-violet-600 text-violet-300 hover:text-white text-sm font-medium py-2 px-5 rounded-full border border-violet-600/40 hover:border-violet-600 transition-all duration-300"
-      >
-        Написати нам
-      </a>
-
-      <!-- Mobile menu button -->
-      <button id="mobile-menu-btn" class="md:hidden text-violet-300 p-2" aria-label="Menu">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path class="menu-open" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-          <path class="menu-close hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    <div style="display:flex;align-items:center;gap:12px;">
+      <a class="ev-nav-cta ev-btn" href={ig} target="_blank" rel="noopener noreferrer" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px;padding:11px 22px;border-radius:999px;background:linear-gradient(135deg,#A855F7,#FF5C7A);color:#fff;font-weight:700;font-size:14px;box-shadow:0 8px 24px rgba(168,85,247,0.4);white-space:nowrap;">Написати нам</a>
+      <button id="ev-burger" class="ev-nav-burger" aria-label="Меню" aria-expanded="false" aria-controls="ev-mobile-menu" style="align-items:center;justify-content:center;width:42px;height:42px;padding:0;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);color:#F4F1FA;cursor:pointer;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false">
+          <path class="ev-burger-open" d="M4 7h16M4 12h16M4 17h16"></path>
+          <path class="ev-burger-close" style="display:none" d="M6 6l12 12M6 18L18 6"></path>
         </svg>
       </button>
     </div>
+  </div>
 
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="md:hidden hidden border-t border-deep-violet/50">
-      <div class="px-4 py-6 flex flex-col gap-4">
-        {links.map((link) => (
-          <a
-            href={link.href}
-            class="mobile-link text-text-muted hover:text-violet-300 transition-colors duration-300 text-lg"
-          >
-            {link.label}
-          </a>
-        ))}
-        <a
-          href="https://www.instagram.com/crushikme/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="mt-2 inline-flex items-center justify-center gap-2 bg-violet-600 text-white font-medium py-3 px-6 rounded-full text-sm"
-        >
-          Написати в Instagram
-        </a>
-      </div>
-    </div>
+  <div id="ev-mobile-menu" class="ev-nav-mobile" aria-label="Мобільне меню" style="flex-direction:column;padding:8px 22px 22px;border-top:1px solid rgba(168,85,247,0.12);background:rgba(10,6,18,0.96);backdrop-filter:blur(16px);">
+    {links.map((l) => (
+      <a href={l.href} class="ev-mobile-link" style="text-decoration:none;color:#CFC6E2;font-size:16px;font-weight:600;padding:13px 4px;border-bottom:1px solid rgba(255,255,255,0.05);">{l.label}</a>
+    ))}
+    <a href={ig} target="_blank" rel="noopener noreferrer" class="ev-mobile-link ev-btn" style="text-decoration:none;margin-top:14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:999px;background:linear-gradient(135deg,#A855F7,#FF5C7A);color:#fff;font-weight:700;font-size:14px;">Написати нам</a>
   </div>
 </nav>
 
 <script>
-  const nav = document.getElementById('main-nav');
-  const menuBtn = document.getElementById('mobile-menu-btn');
-  const mobileMenu = document.getElementById('mobile-menu');
-  const menuOpen = menuBtn?.querySelector('.menu-open');
-  const menuClose = menuBtn?.querySelector('.menu-close');
+  const burger = document.getElementById('ev-burger');
+  const menu = document.getElementById('ev-mobile-menu');
+  const iconOpen = burger?.querySelector('.ev-burger-open') as SVGElement | null;
+  const iconClose = burger?.querySelector('.ev-burger-close') as SVGElement | null;
 
-  // Show nav after scrolling past hero
-  let lastScroll = 0;
-  window.addEventListener('scroll', () => {
-    const scrollY = window.scrollY;
-    const heroHeight = window.innerHeight * 0.6;
+  const setOpen = (v: boolean) => {
+    menu?.classList.toggle('open', v);
+    burger?.setAttribute('aria-expanded', String(v));
+    if (iconOpen) iconOpen.style.display = v ? 'none' : '';
+    if (iconClose) iconClose.style.display = v ? '' : 'none';
+  };
 
-    if (nav) {
-      if (scrollY > heroHeight) {
-        nav.classList.remove('-translate-y-full');
-        nav.classList.add('translate-y-0');
-      } else {
-        nav.classList.add('-translate-y-full');
-        nav.classList.remove('translate-y-0');
-        // Close mobile menu when scrolling back to top
-        mobileMenu?.classList.add('hidden');
-        menuOpen?.classList.remove('hidden');
-        menuClose?.classList.add('hidden');
-      }
-    }
-    lastScroll = scrollY;
-  });
-
-  // Mobile menu toggle
-  menuBtn?.addEventListener('click', () => {
-    mobileMenu?.classList.toggle('hidden');
-    menuOpen?.classList.toggle('hidden');
-    menuClose?.classList.toggle('hidden');
-  });
-
-  // Close mobile menu on link click
-  document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => {
-      mobileMenu?.classList.add('hidden');
-      menuOpen?.classList.remove('hidden');
-      menuClose?.classList.add('hidden');
-    });
-  });
+  burger?.addEventListener('click', () => setOpen(!menu?.classList.contains('open')));
+  document.querySelectorAll('.ev-mobile-link').forEach((a) =>
+    a.addEventListener('click', () => setOpen(false)),
+  );
 </script>
