@@ -115,12 +115,16 @@ body {
   .ev-nav-mobile { display: none !important; }
 }
 
+/* Scroll lock while the mobile menu is open (iOS-safe: position:fixed the body,
+   the script restores the scroll position on release). The full-screen menu is
+   its own overlay above the header, so the header needs no special handling. */
+body.ev-scroll-lock { position: fixed; left: 0; right: 0; width: 100%; overflow: hidden; }
+
 /* Frosted header: where neither backdrop-filter form is supported
    (older iOS Safari, many in-app/WebView browsers), fall back to a
    near-solid background so page content doesn't bleed through the nav. */
 @supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
   .ev-nav { background: #0d0816 !important; }
-  .ev-nav-mobile { background: #0b0713 !important; }
 }
 
 /* ============ HOVER & MICRO-INTERACTIONS ============ */

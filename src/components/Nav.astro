@@ -28,30 +28,111 @@ const ig = 'https://www.instagram.com/crushikme/';
       </button>
     </div>
   </div>
-
-  <div id="ev-mobile-menu" class="ev-nav-mobile" aria-label="Мобільне меню" style="flex-direction:column;padding:8px 22px 22px;border-top:1px solid rgba(168,85,247,0.12);background:rgba(10,6,18,0.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);">
-    {links.map((l) => (
-      <a href={l.href} class="ev-mobile-link" style="text-decoration:none;color:#CFC6E2;font-size:16px;font-weight:600;padding:13px 4px;border-bottom:1px solid rgba(255,255,255,0.05);">{l.label}</a>
-    ))}
-    <a href={ig} target="_blank" rel="noopener noreferrer" class="ev-mobile-link ev-btn" style="text-decoration:none;margin-top:14px;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:999px;background:linear-gradient(135deg,#A855F7,#FF5C7A);color:#fff;font-weight:700;font-size:14px;">Написати нам</a>
-  </div>
 </nav>
+
+<div id="ev-mobile-menu" class="ev-nav-mobile" aria-label="Мобільне меню" style="position:fixed;inset:0;z-index:60;flex-direction:column;background:#0A0612;overflow-y:auto;overscroll-behavior:contain;">
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;">
+    <span style="font-family:'Unbounded';font-weight:800;font-size:22px;letter-spacing:-0.02em;color:#fff;">E<span style="background:linear-gradient(120deg,#A855F7,#FF5C7A);-webkit-background-clip:text;background-clip:text;color:transparent;">&amp;</span>V</span>
+    <button id="ev-menu-close" aria-label="Закрити меню" style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;padding:0;border-radius:12px;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.14);color:#F4F1FA;cursor:pointer;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M6 6l12 12M6 18L18 6"></path></svg>
+    </button>
+  </div>
+  <div style="display:flex;flex-direction:column;flex:1;padding:8px 22px 32px;">
+    {links.map((l) => (
+      <a href={l.href} class="ev-mobile-link" style="text-decoration:none;color:#CFC6E2;font-size:18px;font-weight:600;padding:18px 4px;border-bottom:1px solid rgba(255,255,255,0.06);">{l.label}</a>
+    ))}
+    <a href={ig} target="_blank" rel="noopener noreferrer" class="ev-mobile-link ev-btn" style="text-decoration:none;margin-top:auto;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 22px;border-radius:999px;background:linear-gradient(135deg,#A855F7,#FF5C7A);color:#fff;font-weight:700;font-size:15px;">Написати нам</a>
+  </div>
+</div>
 
 <script>
   const burger = document.getElementById('ev-burger');
+  const closeBtn = document.getElementById('ev-menu-close');
   const menu = document.getElementById('ev-mobile-menu');
-  const iconOpen = burger?.querySelector('.ev-burger-open') as SVGElement | null;
-  const iconClose = burger?.querySelector('.ev-burger-close') as SVGElement | null;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const EASE = 'cubic-bezier(.2,.7,.2,1)';
+  let isOpen = false;
 
-  const setOpen = (v: boolean) => {
-    menu?.classList.toggle('open', v);
-    burger?.setAttribute('aria-expanded', String(v));
-    if (iconOpen) iconOpen.style.display = v ? 'none' : '';
-    if (iconClose) iconClose.style.display = v ? '' : 'none';
+  // iOS-safe scroll lock: position:fixed the body, restore scroll on release
+  // (overflow:hidden alone doesn't hold on iOS).
+  let lockedScrollY = 0;
+
+  const lockScroll = () => {
+    if (document.body.classList.contains('ev-scroll-lock')) return;
+    lockedScrollY = window.scrollY;
+    document.body.style.top = `-${lockedScrollY}px`;
+    document.body.classList.add('ev-scroll-lock');
   };
 
-  burger?.addEventListener('click', () => setOpen(!menu?.classList.contains('open')));
+  const unlockScroll = () => {
+    document.body.classList.remove('ev-scroll-lock');
+    document.body.style.top = '';
+    // Restore instantly — bypass scroll-behavior:smooth so the page doesn't
+    // visibly fly to the top and animate back when the menu closes.
+    const html = document.documentElement;
+    const prev = html.style.scrollBehavior;
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, lockedScrollY);
+    html.style.scrollBehavior = prev;
+  };
+
+  // display can't be transitioned, so animate with WAAPI and toggle .open
+  // (display:none/flex) around the animation's lifecycle.
+  const cancelAnims = () => menu?.getAnimations?.({ subtree: true }).forEach((a) => a.cancel());
+
+  const animateOpen = () => {
+    if (!menu || prefersReduced) return;
+    cancelAnims();
+    menu.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, easing: EASE });
+    menu.querySelectorAll('.ev-mobile-link').forEach((el, i) =>
+      el.animate(
+        [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 320, delay: 70 + i * 45, easing: EASE, fill: 'backwards' },
+      ),
+    );
+  };
+
+  const animateClose = () => {
+    if (!menu || prefersReduced) return Promise.resolve();
+    cancelAnims();
+    // No fill: the post-finish revert is hidden by .open removal (display:none)
+    // in the same tick, and avoids a lingering forwards effect.
+    return menu
+      .animate(
+        [
+          { opacity: 1, transform: 'translateY(0)' },
+          { opacity: 0, transform: 'translateY(18px)' },
+        ],
+        { duration: 280, easing: 'cubic-bezier(.4,0,1,1)' },
+      )
+      .finished.catch(() => {});
+  };
+
+  const setOpen = (v: boolean) => {
+    if (v === isOpen) return;
+    isOpen = v;
+    burger?.setAttribute('aria-expanded', String(v));
+    if (v) {
+      menu?.classList.add('open');
+      lockScroll();
+      animateOpen();
+    } else {
+      animateClose().then(() => {
+        if (isOpen) return; // reopened mid-animation — keep it open
+        menu?.classList.remove('open');
+        unlockScroll();
+      });
+    }
+  };
+
+  burger?.addEventListener('click', () => setOpen(true));
+  closeBtn?.addEventListener('click', () => setOpen(false));
   document.querySelectorAll('.ev-mobile-link').forEach((a) =>
     a.addEventListener('click', () => setOpen(false)),
   );
+
+  // Close (and release the lock) if the viewport grows past the mobile breakpoint
+  window.matchMedia('(min-width: 641px)').addEventListener('change', (e) => {
+    if (e.matches) setOpen(false);
+  });
 </script>
