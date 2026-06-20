@@ -8,7 +8,7 @@ const links = [
 const ig = 'https://www.instagram.com/crushikme/';
 ---
 
-<nav style="position:sticky;top:0;z-index:50;backdrop-filter:blur(16px);background:rgba(10,6,18,0.78);border-bottom:1px solid rgba(168,85,247,0.12);">
+<nav class="ev-nav" style="position:sticky;top:0;z-index:50;-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);background:rgba(10,6,18,0.78);border-bottom:1px solid rgba(168,85,247,0.12);">
   <div class="ev-nav-inner" style="max-width:1200px;margin:0 auto;padding:18px 40px;display:flex;align-items:center;justify-content:space-between;gap:16px;">
     <a href="#top" style="text-decoration:none;font-family:'Unbounded';font-weight:800;font-size:22px;letter-spacing:-0.02em;color:#fff;">E<span style="background:linear-gradient(120deg,#A855F7,#FF5C7A);-webkit-background-clip:text;background-clip:text;color:transparent;">&amp;</span>V</a>
 
@@ -29,7 +29,7 @@ const ig = 'https://www.instagram.com/crushikme/';
     </div>
   </div>
 
-  <div id="ev-mobile-menu" class="ev-nav-mobile" aria-label="Мобільне меню" style="flex-direction:column;padding:8px 22px 22px;border-top:1px solid rgba(168,85,247,0.12);background:rgba(10,6,18,0.96);backdrop-filter:blur(16px);">
+  <div id="ev-mobile-menu" class="ev-nav-mobile" aria-label="Мобільне меню" style="flex-direction:column;padding:8px 22px 22px;border-top:1px solid rgba(168,85,247,0.12);background:rgba(10,6,18,0.96);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);">
     {links.map((l) => (
       <a href={l.href} class="ev-mobile-link" style="text-decoration:none;color:#CFC6E2;font-size:16px;font-weight:600;padding:13px 4px;border-bottom:1px solid rgba(255,255,255,0.05);">{l.label}</a>
     ))}
